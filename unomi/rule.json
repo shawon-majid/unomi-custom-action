@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "id": "incrementPageViewAndNotify",
+    "name": "Increment pageViewCount and notify on milestones",
+    "description": "On every view event, bump profile.pageViewCount and POST to webhook when count is a multiple of 10.",
+    "scope": "unomi-test",
+    "readOnly": false
+  },
+  "condition": {
+    "type": "eventTypeCondition",
+    "parameterValues": {
+      "eventTypeId": "view"
+    }
+  },
+  "actions": [
+    {
+      "type": "incrementPropertyAction",
+      "parameterValues": {
+        "propertyName": "pageViewCount"
+      }
+    },
+    {
+      "type": "notifyOnPageViewMilestoneAction",
+      "parameterValues": {
+        "webhookUrl": "http://host.docker.internal:3001/unomi-hook",
+        "threshold": 10
+      }
+    }
+  ]
+}
