@@ -1,4 +1,4 @@
-# unomi-test
+# unomi-custom-action
 
 Local spike of [Apache Unomi](https://unomi.apache.org/) 2.x:
 
