@@ -109,6 +109,13 @@
         return res.json();
       }
 
+      // Unomi's item-id schema regex is ^(\w|[-_@\.]){0,60}$ — slashes fail.
+      // Sanitize the page path into a legal id; "/" → "home".
+      function pageId() {
+        const p = location.pathname.replace(/^\//, "").replace(/[^\w\-_@\.]/g, "_") || "home";
+        return p.slice(0, 60);
+      }
+
       function viewEvent() {
         return {
           eventType: "view",
@@ -116,7 +123,7 @@
           source: { itemType: "site", itemId: SCOPE, scope: SCOPE },
           target: {
             itemType: "page",
-            itemId: location.pathname,
+            itemId: pageId(),
             scope: SCOPE,
             properties: { pageInfo: { pageName: document.title, pagePath: location.pathname } },
           },
