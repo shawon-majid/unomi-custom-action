@@ -1,3 +1,5 @@
+name: unomi-custom-action
+
 services:
   elasticsearch:
     image: elasticsearch:7.17.5
